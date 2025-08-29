@@ -495,6 +495,21 @@ function lunch()
         return 1
     fi
 
+    # >>> Hook to run vendor/official script before check_product <<<
+    local T=$(gettop)
+    local shortdev=${product#lineage_}   # strip lineage_ if present
+    if [ -f "$T/vendor/official/${shortdev}.sh" ]; then
+        echo ">>> Running repo sync for $shortdev"
+        bash "$T/vendor/official/handler.sh" "$T/vendor/official/${shortdev}.sh"
+    
+    # check if vendorsetup.sh exists in device tree and include it
+    if [ -f "$T/device/xiaomi/$shortdev/vendorsetup.sh" ]; then
+        echo ">>> Including device/xiaomi/$shortdev/vendorsetup.sh"
+        source "$T/device/xiaomi/$shortdev/vendorsetup.sh"
+        fi
+    fi
+    # >>> End hook <<<
+    
     if ! check_product $product $release
     then
         # if we can't find a product, try to grab it off the LineageOS GitHub
