@@ -214,6 +214,41 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   # Dump fingerprints
   script.Print("Target: {}".format(target_info.fingerprint))
 
+  script.Print("                                              ");
+  script.Print("       ______          _           _          ");
+  script.Print("       | ___ \        (_)         | |         ");
+  script.Print("       | |_/ / __ ___  _  ___  ___| |_        ");
+  script.Print("       |  __/ '__/ _ \| |/ _ \/ __| __|       ");
+  script.Print("       | |  | | | (_) | |  __/ (__| |_        ");
+  script.Print("       \_|  |_|  \___/| |\___|\___|\__|       ");
+  script.Print("                     _/ |                     ");
+  script.Print("                    |__/                      ");
+  script.Print("       ___  ___      _        _               ");
+  script.Print("       |  \/  |     | |      (_)              ");
+  script.Print("       | .  . | __ _| |_ _ __ ___  ____  __   ");
+  script.Print("       | |\/| |/ _` | __| '__| \ \/ /\ \/ /   ");
+  script.Print("       | |  | | (_| | |_| |  | |>  <  >  <    ");
+  script.Print("       \_|  |_/\__,_|\__|_|  |_/_/\_\/_/\_\   ");
+  script.Print("                                              ");
+
+  buildid = target_info.GetBuildProp("ro.matrixx.display.version")
+  androidver = target_info.GetBuildProp("ro.build.version.release")
+  buildidn = target_info.GetBuildProp("ro.build.id")
+  buildday = target_info.GetBuildProp("ro.build.date")
+  securep = target_info.GetBuildProp("ro.build.version.security_patch")
+  device = target_info.GetBuildProp("ro.product.name")
+  manufacturer = target_info.GetBuildProp("ro.product.manufacturer")
+  script.Print("***********************************************");
+  script.Print(" ROM version      : %s"%(buildid));
+  script.Print(" Android version  : %s"%(androidver));
+  script.Print(" Security patch   : %s"%(securep));
+  script.Print(" Build date       : %s"%(buildday));
+  script.Print("***********************************************");
+  script.Print(" Device           : %s"%(device));
+  script.Print(" Manufacturer     : %s"%(manufacturer));
+  script.Print("***********************************************");
+  script.Print("                                         ");
+
   device_specific.FullOTA_InstallBegin()
 
   CopyInstallTools(output_zip)
